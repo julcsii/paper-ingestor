@@ -1,6 +1,9 @@
 # paper-ingestor
 
-## Run localally
+## Run locally
+```
+python -m paper_ingestor.main
+```
 
 ### Requirements
 * Docker
