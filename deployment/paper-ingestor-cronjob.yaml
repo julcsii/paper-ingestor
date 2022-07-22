@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: elicit-paper-ingestor
+spec:
+  schedule: "12 1 * * *" # every day at 01:12am UTC
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: elicit-paper-ingestor
+            image: 067892212219.dkr.ecr.eu-central-1.amazonaws.com/elicit-paper-ingestor
+            imagePullPolicy: Always
+          restartPolicy: OnFailure
