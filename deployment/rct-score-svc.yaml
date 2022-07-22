@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elicit-rct-score
+  labels:
+    app: elicit-rct-score
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elicit-rct-score
+  template:
+    metadata:
+      labels:
+        app: elicit-rct-score
+    spec:
+      containers:
+        - name: elicit-rct-score
+          image: public.ecr.aws/t9g4g7y2/rct-svm:andrew
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elicit-rct-score
+spec:
+  ports:
+    - port: 5566
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: elicit-rct-score

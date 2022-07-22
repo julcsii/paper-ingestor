@@ -26,9 +26,15 @@ python -m paper_ingestor.main
 # optional: switch to aws profile export AWS_PROFILE=personal
 aws eks --region eu-central-1 update-kubeconfig --name elicit-stg
 ```
+
+### Deploy rct service
+```
+kubectl apply -f deployment/rct-score-svc.yaml
+```
+
 ### Deploy new version of paper-ingestor
 
-0. Set env variables
+1. Set env variables
 ```
 export CODE_PATH='paper_ingestor'
 export IMAGE_NAME='elicit-paper-ingestor'
@@ -38,9 +44,6 @@ export LOCAL_IMAGE_URL=$IMAGE_NAME:$IMAGE_TAG
 export ECR_IMAGE_URL=$ECR_HOST/$LOCAL_IMAGE_URL
 ```
 
-1. Run unit tests
-```
-```
 2. Build new Docker image
 ```
 docker build -t $LOCAL_IMAGE_URL . -f $CODE_PATH/Dockerfile
